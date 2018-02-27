@@ -1,5 +1,8 @@
 export default {
   route: {
+    Report:'Report',
+    New:'New Report',
+    History: 'History',
     dashboard: 'Dashboard',
     introduction: 'Introduction',
     documentation: 'Documentation',

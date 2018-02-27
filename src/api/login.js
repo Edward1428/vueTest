@@ -1,27 +1,26 @@
 import request from '@/utils/request'
-
+import axios from 'axios'
 export function loginByUsername(username, password) {
-  const data = {
-    username,
-    password
-  }
-  return request({
-    url: '/login/login',
-    method: 'post',
-    data
+  return axios({
+    method: 'put',
+    url: '/api/user/login',
+    data: {
+      'username': username,
+      'password': password
+    }
   })
 }
 
 export function logout() {
-  return request({
-    url: '/login/logout',
-    method: 'post'
+  return axios({
+    url: '/api/user/logout',
+    method: 'PUT'
   })
 }
 
 export function getUserInfo(token) {
-  return request({
-    url: '/user/info',
+  return axios({
+    url: '/api/user',
     method: 'get',
     params: { token }
   })
