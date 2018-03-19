@@ -13,7 +13,7 @@
 
                 <el-checkbox-group v-model="userInfo.serviceList">
                   <el-checkbox v-for="option in service" :label="option.id" :key="option.id" border size="medium"
-                               style="display:inline-block; margin:10px; ">{{option.name}}
+                               style="display:inline-block; margin:10px; " :disabled="option.disabled">{{option.name}}
                   </el-checkbox>
                 </el-checkbox-group>
               </el-form-item>
@@ -74,11 +74,12 @@ export default {
     return {
       listLoading: false,
       service: [
-        { id: 1, name: '反诈骗策略引擎' },
-        { id: 2, name: '银行卡四要素' },
-        { id: 3, name: '手机三要素' },
-        { id: 4, name: '手机在网时长' },
-        { id: 5, name: '手机在网状态' }],
+        { id: 1, name: '反诈骗策略引擎', disabled: true },
+        { id: 2, name: '银行卡四要素', disabled: true },
+        { id: 3, name: '手机三要素', disabled: true },
+        { id: 4, name: '手机在网时长', disabled: true },
+        { id: 5, name: '手机在网状态', disabled: true },
+        { id: 6, name: '身份证肖像、手机、银行卡、黑名单、不良记录、多头借贷' }],
       rules: {
         name: [],
         cell: [],
@@ -93,10 +94,10 @@ export default {
         serviceList: []
       },
       able: {
-        nameAbleList: [1, 2, 3, 4, 5],
-        cellAbleList: [1, 2, 3, 4, 5],
-        idNumAbleList: [1, 2, 3, 4, 5],
-        bankIdAbleList: [1, 2]
+        nameAbleList: [1, 2, 3, 4, 5, 6],
+        cellAbleList: [1, 2, 3, 4, 5, 6],
+        idNumAbleList: [1, 2, 3, 4, 5, 6],
+        bankIdAbleList: [1, 2, 6]
       },
       disable: {
         nameDisable: true,

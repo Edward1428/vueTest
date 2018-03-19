@@ -2,16 +2,91 @@
   <div class="mixin-components-container">
 
     <el-row v-loading.body="listLoading" element-loading-text="努力加载中">
-      <el-card class="box-card">
-        <div slot="header" class="clearfix">
-          <span>客户分析报告</span>
+
+      <el-card class="box-card" v-show="false">
+        <div class="components-container">
+          <code style="color: black">申请信息验证（）</code>
+
+          <el-col :span="6">
+            <el-card class="box-card">
+              <div slot="header" class="clearfix">
+                <span>手机三要素</span>
+              </div>
+              <el-table
+                :data="info"
+                border stripe
+                style="width: 100%" >
+
+                <el-table-column
+                  prop="document"
+                  label="结果">
+                </el-table-column>
+              </el-table>
+            </el-card>
+          </el-col>
+          <el-col :span="6">
+            <el-card class="box-card">
+              <div slot="header" class="clearfix">
+                <span>银行卡四要素</span>
+              </div>
+              <el-table
+                :data="info"
+                border stripe
+                style="width: 100%" >
+
+                <el-table-column
+                  prop="document"
+                  label="结果">
+                </el-table-column>
+              </el-table>
+            </el-card>
+          </el-col>
+          <el-col :span="6">
+            <el-card class="box-card">
+              <div slot="header" class="clearfix">
+                <span>手机在网时长</span>
+              </div>
+              <el-table
+                :data="info"
+                border stripe
+                style="width: 100%" >
+
+                <el-table-column
+                  prop="document"
+                  label="结果">
+                </el-table-column>
+              </el-table>
+            </el-card>
+          </el-col>
+          <el-col :span="6">
+            <el-card class="box-card">
+              <div slot="header" class="clearfix">
+                <span>手机手机在网状态</span>
+              </div>
+              <el-table
+                :data="info"
+                border stripe
+                style="width: 100%" >
+
+                <el-table-column
+                  prop="document"
+                  label="结果">
+                </el-table-column>
+              </el-table>
+            </el-card>
+          </el-col>
+
         </div>
-
-
+      </el-card>
+      <el-card class="box-card" v-show="false">
 
         <div class="components-container">
-          <code style="color: black">贷前风险汇总</code>
+          <code style="color: black">反诈骗策略引擎</code>
           <el-col>
+            <el-card>
+              <div slot="header" class="clearfix">
+                <span>贷前风险汇总</span>
+              </div>
               <el-table
                 :data="total"
                 border stripe
@@ -25,54 +100,38 @@
                   label="命中规则">
                 </el-table-column>
               </el-table>
+            </el-card>
           </el-col>
-        </div>
+          <el-col>
+            <el-card class="box-card">
+              <div slot="header" class="clearfix">
+                <span>客户基础信息</span>
+              </div>
+              <el-table
+                :data="customer"
+                border stripe
+                style="width: 100%" >
+                <el-table-column
+                  prop="name"
+                  label="姓名" >
+                </el-table-column>
+                <el-table-column
+                  prop="cell"
+                  label="电话号码">
+                </el-table-column>
+                <el-table-column
+                  prop="idNum"
+                  label="身份证">
+                </el-table-column>
+                <el-table-column
+                  prop="bankId"
+                  label="银行卡">
+                </el-table-column>
+              </el-table>
+            </el-card>
 
-      </el-card>
-      <el-card class="box-card">
-        <div class="components-container">
-          <code style="color: black">申请信息验证</code>
-
-            <el-col>
-              <el-card class="box-card">
-                <div slot="header" class="clearfix">
-                  <span>客户基础信息</span>
-                </div>
-                <el-table
-                  :data="customer"
-                  border stripe
-                  style="width: 100%" >
-                  <el-table-column
-                    prop="name"
-                    label="姓名" >
-                  </el-table-column>
-                  <el-table-column
-                    prop="cell"
-                    label="电话号码">
-                  </el-table-column>
-                  <el-table-column
-                    prop="idNum"
-                    label="身份证">
-                  </el-table-column>
-                  <el-table-column
-                    prop="bankId"
-                    label="银行卡">
-                  </el-table-column>
-                  <el-table-column
-                    prop="linkManCell"
-                    label="联系人号码">
-                  </el-table-column>
-                  <el-table-column
-                    prop="homeAddress"
-                    label="家庭地址">
-                  </el-table-column>
-                </el-table>
-              </el-card>
-
-            </el-col>
-
-
-          <el-col :span="12">
+          </el-col>
+          <el-col >
             <el-card class="box-card">
               <div slot="header" class="clearfix">
                 <span>信息关联性</span>
@@ -92,34 +151,6 @@
               </el-table>
             </el-card>
           </el-col>
-
-          <el-col :span="12">
-            <el-card class="box-card">
-              <div slot="header" class="clearfix">
-                <span>手机状态检验</span>
-              </div>
-              <el-table
-                :data="tel"
-                border stripe
-                style="width: 100%" >
-                <el-table-column
-                  prop="data"
-                  label="检验项">
-                </el-table-column>
-                <el-table-column
-                  prop="document"
-                  label="结果">
-                </el-table-column>
-              </el-table>
-            </el-card>
-          </el-col>
-        </div>
-      </el-card>
-
-      <el-card class="box-card">
-
-        <div class="components-container">
-          <code style="color: black">公检法信息</code>
           <el-col>
             <el-card class="box-card">
               <div slot="header" class="clearfix">
@@ -131,7 +162,7 @@
                 style="width: 100%" >
                 <el-table-column
                   prop="num"
-                  label="序号" width="50">
+                  label="序号">
                 </el-table-column>
                 <el-table-column
                   prop="name"
@@ -160,7 +191,6 @@
               </el-table>
             </el-card>
           </el-col>
-
           <el-col>
             <el-card class="box-card">
               <div slot="header" class="clearfix">
@@ -172,7 +202,7 @@
                 style="width: 100%" >
                 <el-table-column
                   prop="num"
-                  label="序号" width="50">
+                  label="序号">
                 </el-table-column>
                 <el-table-column
                   prop="name"
@@ -205,14 +235,6 @@
               </el-table>
             </el-card>
           </el-col>
-        </div>
-
-      </el-card>
-
-      <el-card class="box-card">
-
-        <div class="components-container">
-          <code style="color: black">金融信息</code>
           <el-col>
             <el-card class="box-card">
               <div slot="header" class="clearfix">
@@ -224,7 +246,7 @@
                 style="width: 100%" >
                 <el-table-column
                   prop="num"
-                  label="序号" width="50">
+                  label="序号">
                 </el-table-column>
                 <el-table-column
                   prop="document"
@@ -237,16 +259,10 @@
               </el-table>
             </el-card>
           </el-col>
-
-          <el-col style="color: #3a835d; height: 50px">
-            <span>说明：</span>
-          </el-col>
-
-
-          <el-col :span="12">
+          <el-col>
             <el-card class="box-card">
               <div slot="header" class="clearfix">
-                <span>多次信贷申请情况（身份证)</span>
+                <span>多次信贷申请情况（按身份证查询）</span>
               </div>
               <el-table
                 :data="timesById"
@@ -275,10 +291,10 @@
               </el-table>
             </el-card>
           </el-col>
-          <el-col :span="12">
+          <el-col >
             <el-card class="box-card">
               <div slot="header" class="clearfix">
-                <span>多次信贷申请情况（手机号)</span>
+                <span>多次信贷申请情况（按手机号查询）</span>
               </div>
               <el-table
                 :data="timesByTel"
@@ -310,10 +326,200 @@
         </div>
 
       </el-card>
+
+      <el-card class="box-card" v-show="show.aliJd">
+        <div class="components-container">
+          <div class="title-block">身份证肖像、手机、银行卡、黑名单、不良记录、多头借贷</div>
+          <el-col>
+            <el-card class="box-card">
+              <div slot="header" class="clearfix">
+                <span>验证结果</span>
+              </div>
+
+              <el-row>
+
+                <el-col :span="6">
+                  <el-card>
+                    <img :src="check.photo" class="image"/>
+                  </el-card>
+                </el-col>
+                <el-col :span="18">
+                </el-col>
+              </el-row>
+
+            </el-card>
+          </el-col>
+
+          <el-col>
+            <el-card class="box-card">
+              <el-row >
+                <el-col :span="8">
+                  <el-card class="box-card">
+                    <div slot="header" class="clearfix">
+                      <span>身份证验证</span>
+                    </div>
+                    <el-table
+                      :show-header="false"
+                      :data="check.idCard"
+                      border stripe
+                      style="width: 100%"
+                      :row-class-name="tableRowClassName">
+
+                      <el-table-column
+                        prop="msg"
+                        label="结果">
+                      </el-table-column>
+                    </el-table>
+                  </el-card>
+                </el-col>
+                <el-col :span="8">
+                  <el-card class="box-card">
+                    <div slot="header" class="clearfix">
+                      <span>手机号验证</span>
+                    </div>
+                    <el-table
+                      :show-header="false"
+                      :data="check.cell"
+                      border stripe
+                      style="width: 100%"
+                      :row-class-name="tableRowClassName">
+
+                      <el-table-column
+                        prop="msg"
+                        label="结果">
+                      </el-table-column>
+                    </el-table>
+                  </el-card>
+                </el-col>
+                <el-col :span="8">
+                  <el-card class="box-card">
+                    <div slot="header" class="clearfix">
+                      <span>银行卡验证</span>
+                    </div>
+                    <el-table
+                      :show-header="false"
+                      :data="check.bankCard"
+                      border stripe
+                      style="width: 100%"
+                      :row-class-name="tableRowClassName">
+
+                      <el-table-column
+                        prop="msg"
+                        label="结果">
+                      </el-table-column>
+                    </el-table>
+                  </el-card>
+                </el-col>
+              </el-row>
+
+            </el-card>
+          </el-col>
+          <el-col>
+            <el-card class="box-card">
+
+              <el-row>
+                <el-table
+                  :show-header="false"
+                  :data="customerTable"
+                  style="width: 100%">
+                  <el-table-column
+                    prop="key"
+                    label="信息">
+                  </el-table-column>
+                  <el-table-column
+                    prop="value"
+                    label="数据">
+                  </el-table-column>
+                </el-table>
+              </el-row>
+
+            </el-card>
+          </el-col>
+          <el-col>
+            <el-card class="box-card">
+
+              <el-row>
+                <el-table
+                  :show-header="false"
+                  :data="aliJdTable"
+                  style="width: 100%"
+                  :row-class-name="tableRowClassName">
+                  <el-table-column
+                    prop="key"
+                    label="项目">
+                  </el-table-column>
+                  <el-table-column
+                    prop="value"
+                    label="数据">
+                  </el-table-column>
+                </el-table>
+              </el-row>
+
+
+            </el-card>
+          </el-col>
+
+
+          <el-col>
+            <el-card class="box-card">
+              <div slot="header" class="clearfix">
+                <span>详情</span>
+              </div>
+              <el-table
+                :data="blackNameLists"
+                border stripe
+                style="width: 100%" >
+
+                <el-table-column
+                  prop="blackRiskType"
+                  label="所属风险类型">
+                </el-table-column>
+                <el-table-column
+                  prop="blackFactsType"
+                  label="所属事件类型">
+                </el-table-column>
+                <el-table-column
+                  prop="blackFacts"
+                  label="命中事件">
+                </el-table-column>
+                <el-table-column
+                  prop="blackPublishSource"
+                  label="备注">
+                </el-table-column>
+                <el-table-column
+                  prop="blackAmt"
+                  label="涉案金额">
+                </el-table-column>
+                <el-table-column
+                  prop="blackHappenDate"
+                  label="发生时间">
+                </el-table-column>
+              </el-table>
+            </el-card>
+          </el-col>
+
+        </div>
+      </el-card>
+
+
     </el-row>
 
   </div>
 </template>
+
+<style>
+  .el-table .warning-row {
+    background: oldlace;
+  }
+
+  .el-table .success-row {
+    background: #d6f9d6;
+  }
+
+  .el-table .danger-row {
+    background: #ffc2da;
+  }
+</style>
 
 <script>
 import PanThumb from '@/components/PanThumb'
@@ -345,21 +551,37 @@ export default {
     }
     return {
       listLoading: true,
+      show: {},
       total: [],
       info: [],
-      tel: [],
       court: [],
       bad: [],
       timesById: [],
       timesByTel: [],
       special: [],
       customer: [],
+      customerTable: [],
+      blackNameLists: [],
+      check: {},
       demo: {
         title: ''
       },
       demoRules: {
         title: [{ required: true, trigger: 'change', validator: validate }]
+      },
+      aliJdTable: []
+    }
+  },
+  methods: {
+    tableRowClassName({row, rowIndex}) {
+      if (row.color === 0) {
+        return 'warning-row';
+      } else if (row.color === 1) {
+        return 'success-row';
+      } else if (row.color === -1) {
+        return 'danger-row';
       }
+      return '';
     }
   },
   created() {
@@ -368,15 +590,22 @@ export default {
     this.$http.get('/api/report/' + id).then(response => {
       const result = response.data
       if (result.status === 1) {
+        console.log(result.data.show)
+        this.show = result.data.show
         this.total = result.data.total
         this.info = result.data.info
-        this.tel = result.data.tel
+
         this.court = result.data.court
         this.bad = result.data.bad
         this.special = result.data.special
         this.timesById = result.data.timesById
         this.timesByTel = result.data.timesByTel
         this.customer = result.data.customer
+
+        this.customerTable = result.data.customerTable
+        this.aliJdTable = result.data.aliJdTable
+        this.check = result.data.check
+        this.blackNameLists = result.data.blackNameLists
       }
     })
     this.listLoading = false
@@ -392,5 +621,20 @@ export default {
 }
 .component-item{
   min-height: 100px;
+}
+.title-block {
+  background: lightskyblue;
+  padding: 15px 16px;
+  margin-bottom: 20px;
+  display: block;
+  line-height: 36px;
+  font-size: 15px;
+  font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+}
+
+.image {
+  width: 100%;
+  display: block;
+
 }
 </style>
