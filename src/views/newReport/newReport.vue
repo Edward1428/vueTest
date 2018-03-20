@@ -79,7 +79,7 @@ export default {
         { id: 3, name: '手机三要素', disabled: true },
         { id: 4, name: '手机在网时长', disabled: true },
         { id: 5, name: '手机在网状态', disabled: true },
-        { id: 6, name: '身份证肖像、手机、银行卡、黑名单、不良记录、多头借贷' }],
+        { id: 6, name: '综合查询' }],
       rules: {
         name: [],
         cell: [],
@@ -149,8 +149,9 @@ export default {
       } else {
         this.disable.bankIdDisable = false
         this.rules.bankId = [
-          { required: true, message: '输入银行卡号', trigger: 'blur' },
-          { min: 16, max: 21, message: '长度在 16 到 21 位', trigger: 'blur' }]
+//          { required: true, message: '输入银行卡号', trigger: 'blur' },
+//          { min: 16, max: 21, message: '长度在 16 到 21 位', trigger: 'blur' }
+          ]
       }
     }
   },

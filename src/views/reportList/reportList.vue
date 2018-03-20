@@ -1,11 +1,30 @@
 <template>
   <div class="app-container calendar-list-container">
     <!-- Note that row-key is necessary to get a correct row order. -->
+    <div class="filter-container">
+      <el-row>
+        <el-col :span = 4>
+          <el-input  class="filter-item" placeholder="被查人姓名"  v-model="listQuery.name">
+          </el-input>
+        </el-col>
+        <el-col :span = 8>
+          <el-input  class="filter-item" placeholder="报告编号"  v-model="listQuery.num">
+          </el-input>
+        </el-col>
+        <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">搜索</el-button>
+      </el-row>
+
+    </div>
     <el-table :data="list" row-key="id"  v-loading.body="listLoading" border highlight-current-row fit stripe style="width: 100%">
 
+      <el-table-column align="center" label="报告编号" width="150">
+        <template slot-scope="scope">
+          <span>{{scope.row.report.num}}</span>
+        </template>
+      </el-table-column>
       <el-table-column align="center" label="被查询人姓名" width="150">
         <template slot-scope="scope">
-          <span>{{scope.row.customer.name}}</span>
+          <span>{{scope.row.report.name}}</span>
         </template>
       </el-table-column>
 
@@ -35,6 +54,11 @@
 
     </el-table>
 
+    <div class="pagination-container">
+      <el-pagination background @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="listQuery.page"
+                     :page-sizes="[5,10,20,30,50]" :page-size="listQuery.limit" layout="total, sizes, prev, pager, next, jumper" :total="total">
+      </el-pagination>
+    </div>
   </div>
 </template>
 
@@ -43,7 +67,6 @@
   import Sortable from 'sortablejs'
 
   export default {
-    name: 'dragTable',
     data() {
       return {
         list: null,
@@ -51,7 +74,9 @@
         listLoading: true,
         listQuery: {
           page: 1,
-          limit: 10
+          limit: 10,
+          name: '',
+          num: ''
         },
         sortable: null,
         oldList: [],
@@ -65,16 +90,28 @@
       getList() {
         this.listLoading = true
         this.$http({
-          method: 'GET',
-          url: '/api/report'
+          method: 'POST',
+          url: '/api/report/listQuery',
+          data: this.listQuery
         }).then(response => {
-          this.list = response.data.data
-          console.log(this.list)
+          this.list = response.data.data.list
+          this.total = response.data.data.total
           this.listLoading = false
         })
       },
       edit(id) {
         this.$router.push('/report/' + id)
+      },
+      handleFilter() {
+        this.getList()
+      },
+      handleSizeChange(val) {
+        this.listQuery.limit = val
+        this.getList()
+      },
+      handleCurrentChange(val) {
+        this.listQuery.page = val
+        this.getList()
       }
     }
   }
