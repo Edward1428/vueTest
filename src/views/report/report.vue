@@ -359,15 +359,24 @@
                       <span>身份证验证</span>
                     </div>
                     <el-table
+                      :size="medium"
                       :show-header="false"
                       :data="check.idCard"
                       border stripe
-                      style="width: 100%"
-                      :row-class-name="tableRowClassName">
+                      style="width: 100%">
 
                       <el-table-column
                         prop="msg"
                         label="结果">
+                        <template slot-scope="scope">
+
+                          <div style="color: black" v-if="scope.row.color === 1">
+                            {{scope.row.msg}}
+                          </div>
+                          <div style="color: #FF0000" v-else>
+                            {{scope.row.msg}}
+                          </div>
+                        </template>
                       </el-table-column>
                     </el-table>
                   </el-card>
@@ -378,15 +387,24 @@
                       <span>手机号验证</span>
                     </div>
                     <el-table
+                      :size="medium"
                       :show-header="false"
                       :data="check.cell"
                       border stripe
-                      style="width: 100%"
-                      :row-class-name="tableRowClassName">
+                      style="width: 100%">
 
                       <el-table-column
                         prop="msg"
                         label="结果">
+                        <template slot-scope="scope">
+
+                          <div style="color: black" v-if="scope.row.color === 1">
+                            {{scope.row.msg}}
+                          </div>
+                          <div style="color: #FF0000" v-else>
+                            {{scope.row.msg}}
+                          </div>
+                        </template>
                       </el-table-column>
                     </el-table>
                   </el-card>
@@ -397,15 +415,24 @@
                       <span>银行卡验证</span>
                     </div>
                     <el-table
+                      :size="medium"
                       :show-header="false"
                       :data="check.bankCard"
                       border stripe
-                      style="width: 100%"
-                      :row-class-name="tableRowClassName">
+                      style="width: 100%">
 
                       <el-table-column
                         prop="msg"
                         label="结果">
+                        <template slot-scope="scope">
+
+                          <div style="color: black" v-if="scope.row.color === 1">
+                            {{scope.row.msg}}
+                          </div>
+                          <div style="color: #FF0000" v-else>
+                            {{scope.row.msg}}
+                          </div>
+                        </template>
                       </el-table-column>
                     </el-table>
                   </el-card>
@@ -419,6 +446,7 @@
 
               <el-row>
                 <el-table
+                  :size="medium"
                   :show-header="false"
                   :data="customerTable"
                   style="width: 100%">
@@ -440,6 +468,7 @@
 
               <el-row>
                 <el-table
+                  :size="medium"
                   :show-header="false"
                   :data="aliJdTable"
                   style="width: 100%">
@@ -451,10 +480,16 @@
                     prop="value"
                     label="数据">
                     <template slot-scope="scope">
-                      <el-tag
-                        :type="scope.row.color === 1 ? 'success' : scope.row.color === 2 ? 'primary' : 'danger'"
-                        close-transition>{{scope.row.value}}
-                      </el-tag>
+
+                      <div style="color: #0066FF" v-if="scope.row.color === 1">
+                        {{scope.row.value}}
+                      </div>
+                      <div style="color: #FF0000" v-else-if="scope.row.color === -1">
+                        {{scope.row.value}}
+                      </div>
+                      <div style="color: #0066FF" v-else>
+                        {{scope.row.value}}
+                      </div>
                     </template>
                   </el-table-column>
                 </el-table>

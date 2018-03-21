@@ -48,7 +48,9 @@ export const asyncRouterMap = [
     meta: {
       title: 'Report',
       icon: 'clipboard',
-      roles: ['admin'] }, // you can set roles in root nav
+      roles: ['admin'],
+      noCache: true
+    }, // you can set roles in root nav
     children: [{
       path: 'insert',
       component: _import('newReport/newReport'),
@@ -75,6 +77,7 @@ export const asyncRouterMap = [
       hidden: true,
       name: 'report',
       meta: {
+        title: 'Report',
         icon: 'lock',
         roles: ['admin'], // or you can only set roles in sub nav
         noCache: true
