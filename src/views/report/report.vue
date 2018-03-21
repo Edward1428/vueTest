@@ -329,7 +329,7 @@
 
       <el-card class="box-card" v-show="show.aliJd">
         <div class="components-container">
-          <div class="title-block">身份证肖像、手机、银行卡、黑名单、不良记录、多头借贷</div>
+          <div class="title-block">综合查询</div>
           <el-col>
             <el-card class="box-card">
               <div slot="header" class="clearfix">
@@ -338,12 +338,12 @@
 
               <el-row>
 
-                <el-col :span="6">
+                <el-col :span="4">
                   <el-card>
                     <img :src="check.photo" class="image"/>
                   </el-card>
                 </el-col>
-                <el-col :span="18">
+                <el-col :span="20">
                 </el-col>
               </el-row>
 
@@ -442,8 +442,7 @@
                 <el-table
                   :show-header="false"
                   :data="aliJdTable"
-                  style="width: 100%"
-                  :row-class-name="tableRowClassName">
+                  style="width: 100%">
                   <el-table-column
                     prop="key"
                     label="项目">
@@ -451,6 +450,12 @@
                   <el-table-column
                     prop="value"
                     label="数据">
+                    <template slot-scope="scope">
+                      <el-tag
+                        :type="scope.row.color === 1 ? 'success' : scope.row.color === 2 ? 'primary' : 'danger'"
+                        close-transition>{{scope.row.value}}
+                      </el-tag>
+                    </template>
                   </el-table-column>
                 </el-table>
               </el-row>
@@ -577,11 +582,22 @@ export default {
       if (row.color === 0) {
         return 'warning-row';
       } else if (row.color === 1) {
-        return 'success-row';
+        return '';
       } else if (row.color === -1) {
         return 'danger-row';
       }
       return '';
+    }
+  },
+  toColor(int) {
+    if (int === 1) {
+      return 'primary'
+    } else if (int === -1) {
+      return 'danger'
+    } else if (int === 0) {
+      return 'success'
+    } else {
+      return ''
     }
   },
   created() {
