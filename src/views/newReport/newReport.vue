@@ -178,6 +178,8 @@ export default {
               const result = response.data
               if (result.status === 1) {
                 this.$router.push('/report/' + result.data)
+              } else {
+                alert(result.msg)
               }
             })
           } else {
