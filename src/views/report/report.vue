@@ -359,7 +359,7 @@
                       <span>身份证验证</span>
                     </div>
                     <el-table
-                      :size="medium"
+
                       :show-header="false"
                       :data="check.idCard"
                       border stripe
@@ -387,7 +387,6 @@
                       <span>手机号验证</span>
                     </div>
                     <el-table
-                      :size="medium"
                       :show-header="false"
                       :data="check.cell"
                       border stripe
@@ -415,7 +414,6 @@
                       <span>银行卡验证</span>
                     </div>
                     <el-table
-                      :size="medium"
                       :show-header="false"
                       :data="check.bankCard"
                       border stripe
@@ -446,7 +444,7 @@
 
               <el-row>
                 <el-table
-                  :size="medium"
+
                   :show-header="false"
                   :data="customerTable"
                   style="width: 100%">
@@ -468,7 +466,7 @@
 
               <el-row>
                 <el-table
-                  :size="medium"
+
                   :show-header="false"
                   :data="aliJdTable"
                   style="width: 100%">
@@ -641,7 +639,6 @@ export default {
     this.$http.get('/api/report/' + id).then(response => {
       const result = response.data
       if (result.status === 1) {
-        console.log(result.data.show)
         this.show = result.data.show
         this.total = result.data.total
         this.info = result.data.info
