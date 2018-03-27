@@ -1,54 +1,45 @@
 <template>
   <div class="app-container calendar-list-container">
     <!-- Note that row-key is necessary to get a correct row order. -->
-    <div class="filter-container">
-      <el-row>
-        <el-col :span = 4>
-          <el-input  class="filter-item" placeholder="被查人姓名"  v-model="listQuery.name">
-          </el-input>
-        </el-col>
-        <el-col :span = 8>
-          <el-input  class="filter-item" placeholder="报告编号"  v-model="listQuery.num">
-          </el-input>
-        </el-col>
-        <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">搜索</el-button>
-      </el-row>
+    <!--<div class="filter-container">-->
+      <!--<el-row>-->
+        <!--<el-col :span = 4>-->
+          <!--<el-input  class="filter-item" placeholder="被查人姓名"  v-model="listQuery.name">-->
+          <!--</el-input>-->
+        <!--</el-col>-->
+        <!--<el-col :span = 8>-->
+          <!--<el-input  class="filter-item" placeholder="报告编号"  v-model="listQuery.num">-->
+          <!--</el-input>-->
+        <!--</el-col>-->
+        <!--<el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">搜索</el-button>-->
+      <!--</el-row>-->
 
-    </div>
+    <!--</div>-->
     <el-table :data="list" row-key="id"  v-loading.body="listLoading" border highlight-current-row fit stripe style="width: 100%">
 
-      <el-table-column align="center" label="报告编号" width="150">
+      <el-table-column align="center" label="操作人" >
         <template slot-scope="scope">
-          <span>{{scope.row.report.num}}</span>
+          <span>{{scope.row.adminName}}</span>
         </template>
       </el-table-column>
-      <el-table-column align="center" label="被查询人姓名" width="150">
+      <el-table-column align="center" label="被操作人" >
         <template slot-scope="scope">
-          <span>{{scope.row.report.name}}</span>
+          <span>{{scope.row.userName}}</span>
         </template>
       </el-table-column>
-
-      <el-table-column width="180px" align="center" label="报告日期">
+      <el-table-column  align="center" label="影响积分">
         <template slot-scope="scope">
-          <span>{{scope.row.report.created_at | parseTime('{y}-{m}-{d} {h}:{i}')}}</span>
+          <span>{{scope.row.integral}}</span>
         </template>
       </el-table-column>
-
-      <el-table-column min-width="300px" label="查询服务">
+      <el-table-column  align="center" label="信息">
         <template slot-scope="scope">
-          <span>{{scope.row.service}}</span>
+          <span>{{scope.row.msg}}</span>
         </template>
       </el-table-column>
-
-      <el-table-column width="110px" align="center" label="Author">
+      <el-table-column  align="center" label="日期">
         <template slot-scope="scope">
-          <span>{{scope.row.nickName}}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column label="操作" width="80">
-        <template slot-scope="scope">
-          <el-button type="text" @click="edit(scope.row.report.id)">详情</el-button>
+          <span>{{scope.row.created_at | parseTime('{y}-{m}-{d} {h}:{i}')}}</span>
         </template>
       </el-table-column>
 
@@ -59,7 +50,10 @@
                      :page-sizes="[5,10,20,30,50]" :page-size="listQuery.limit" layout="total, sizes, prev, pager, next, jumper" :total="total">
       </el-pagination>
     </div>
+
+
   </div>
+
 </template>
 
 <script>
@@ -76,12 +70,18 @@
           page: 1,
           limit: 10,
           name: '',
-          num: '',
-          userId: ''
+          num: ''
         },
         sortable: null,
         oldList: [],
-        newList: []
+        newList: [],
+        dialogFormVisible: false,
+
+        userId: '',
+        nickName: '',
+        password: '',
+        integral: '',
+        addIntegral: ''
       }
     },
     created() {
@@ -92,7 +92,7 @@
         this.listLoading = true
         this.$http({
           method: 'POST',
-          url: '/api/report/listQuery',
+          url: '/api/admin/log/listQuery',
           data: this.listQuery
         }).then(response => {
           this.list = response.data.data.list
@@ -100,8 +100,30 @@
           this.listLoading = false
         })
       },
-      edit(id) {
-        this.$router.push('/report/' + id)
+      edit(index) {
+        var user = this.list[index].user
+        console.log(user)
+        console.log(user.nickName)
+        this.userId = user.id
+        this.nickName = user.nickName
+        this.integral = user.integral
+        this.dialogFormVisible = true
+      },
+      update() {
+        this.$http({
+          method: 'PUT',
+          url: '/api/admin/user',
+          data: {
+            'userId': this.userId,
+            'password': this.password,
+            'nickName': this.nickName,
+            'addIntegral': this.addIntegral
+          }
+        }).then(response => {
+          const result = response.data
+          alert(result.msg)
+        })
+        this.dialogFormVisible = false
       },
       handleFilter() {
         this.getList()

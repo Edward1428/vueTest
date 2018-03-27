@@ -66,10 +66,15 @@ const user = {
           if (!response.data) {
             reject('error')
           }
-          const data = response.data
-          commit('SET_ROLES', ['admin'])
-          commit('SET_NAME', data.data.nickName)
-          commit('SET_AVATAR', data.data.headUrl)
+          const data = response.data.data
+          console.log(data)
+          if (data.role === 1) {
+            commit('SET_ROLES', ['admin'])
+          } else if (data.role === 2) {
+            commit('SET_ROLES', ['channel'])
+          }
+          commit('SET_NAME', data.nickName)
+          commit('SET_AVATAR', data.headUrl)
           resolve(response)
         }).catch(error => {
           reject(error)

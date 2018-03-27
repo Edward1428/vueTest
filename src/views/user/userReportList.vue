@@ -48,7 +48,7 @@
 
       <el-table-column label="操作" width="80">
         <template slot-scope="scope">
-          <el-button type="text" @click="edit(scope.row.report.id)">详情</el-button>
+          <el-button type="text" @click="$router.push('/report/' + scope.row.report.id)">详情</el-button>
         </template>
       </el-table-column>
 
@@ -89,6 +89,7 @@
     },
     methods: {
       getList() {
+        this.listQuery.userId = this.$route.params.userId
         this.listLoading = true
         this.$http({
           method: 'POST',

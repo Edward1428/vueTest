@@ -48,7 +48,7 @@ export const asyncRouterMap = [
     meta: {
       title: 'Report',
       icon: 'clipboard',
-      roles: ['admin'],
+      roles: ['admin', 'channel'],
       noCache: true
     }, // you can set roles in root nav
     children: [{
@@ -58,7 +58,7 @@ export const asyncRouterMap = [
       meta: {
         title: 'New',
         icon: 'form',
-        roles: ['admin'], // or you can only set roles in sub nav
+        roles: ['admin', 'channel'], // or you can only set roles in sub nav
         noCache: true
       }
     }, {
@@ -68,17 +68,54 @@ export const asyncRouterMap = [
       meta: {
         title: 'History',
         icon: 'table',
-        roles: ['admin'], // or you can only set roles in sub nav
+        roles: ['admin', 'channel'], // or you can only set roles in sub nav
         noCache: true
       }
     }, {
       path: ':id',
       component: _import('report/report'),
       hidden: true,
-      name: 'report',
       meta: {
         title: 'Report',
         icon: 'lock',
+        roles: ['admin', 'channel'], // or you can only set roles in sub nav
+        noCache: true
+      }
+    }]
+  }, {
+    path: '/admin',
+    component: Layout,
+    meta: {
+      title: 'Admin',
+      icon: 'lock',
+      roles: ['admin'],
+      noCache: true
+    },
+    children: [{
+      path: 'user',
+      component: _import('user/userList'),
+      name: 'User',
+      meta: {
+        title: 'User',
+        icon: 'peoples',
+        roles: ['admin'], // or you can only set roles in sub nav
+        noCache: true
+      }
+    }, {
+      path: 'log',
+      component: _import('user/log'),
+      name: 'Log',
+      meta: {
+        title: 'Log',
+        icon: 'bug',
+        roles: ['admin'], // or you can only set roles in sub nav
+        noCache: true
+      }
+    }, {
+      path: 'report/:userId',
+      component: _import('user/userReportList'),
+      hidden: true,
+      meta: {
         roles: ['admin'], // or you can only set roles in sub nav
         noCache: true
       }
