@@ -13,7 +13,7 @@
 
                 <el-checkbox-group v-model="userInfo.serviceList">
                   <el-checkbox v-for="option in service" :label="option.id" :key="option.id" border size="medium"
-                               style="display:inline-block; margin:10px; " :disabled="option.disabled">{{option.name}}
+                               style="display:inline-block; margin:10px; " :disabled="option.disabled" v-show="option.show">{{option.name}}
                   </el-checkbox>
                 </el-checkbox-group>
               </el-form-item>
@@ -74,12 +74,12 @@ export default {
     return {
       listLoading: false,
       service: [
-        { id: 1, name: '反诈骗策略引擎', disabled: true },
-        { id: 2, name: '银行卡四要素', disabled: true },
-        { id: 3, name: '手机三要素', disabled: true },
-        { id: 4, name: '手机在网时长', disabled: true },
-        { id: 5, name: '手机在网状态', disabled: true },
-        { id: 6, name: '综合查询' }],
+        { id: 1, name: '反诈骗策略引擎', disabled: true, show: false },
+        { id: 2, name: '银行卡四要素', disabled: true, show: false },
+        { id: 3, name: '手机三要素', disabled: true, show: false },
+        { id: 4, name: '手机在网时长', disabled: true, show: false },
+        { id: 5, name: '手机在网状态', disabled: true, show: false },
+        { id: 6, name: '综合查询', disabled: false, show: true }],
       rules: {
         name: [],
         cell: [],
