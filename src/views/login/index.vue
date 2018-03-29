@@ -1,10 +1,12 @@
 <template>
   <div class="login-container">
     <el-form class="login-form" autoComplete="on" :model="loginForm" :rules="loginRules" ref="loginForm" label-position="left">
-      <div class="title-container">
-        <h3 class="title">{{$t('login.title')}}</h3>
-        <lang-select class="set-language"></lang-select>
-      </div>
+      <img src="/static/img/LOGO分类-08.png" class="image">
+
+      <!--<div class="title-container">-->
+        <!--<h3 class="title">{{$t('login.title')}}</h3>-->
+        <!--<lang-select class="set-language"></lang-select>-->
+      <!--</div>-->
       <el-form-item prop="username">
         <span class="svg-container svg-container_login">
           <svg-icon icon-class="user" />
@@ -227,6 +229,9 @@ $light_gray:#eee;
     position: absolute;
     right: 35px;
     bottom: 28px;
+  }
+  .image {
+    width: 100%;
   }
 }
 </style>
