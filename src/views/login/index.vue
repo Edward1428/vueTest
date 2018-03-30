@@ -177,7 +177,7 @@ $light_gray:#eee;
     right: 0;
     width: 520px;
     padding: 35px 35px 15px 35px;
-    margin: 120px auto;
+    margin: 1px auto;
   }
   .tips {
     font-size: 14px;
