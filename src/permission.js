@@ -4,7 +4,7 @@ import { Message } from 'element-ui'
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css'// progress bar style
 import { getToken } from '@/utils/auth' // getToken from cookie
-
+import axios from 'axios'
 NProgress.configure({ showSpinner: false })// NProgress Configuration
 
 // permissiom judge function
@@ -40,6 +40,18 @@ router.beforeEach((to, from, next) => {
           })
         })
       } else {
+        axios({
+          url: '/api/userInfo',
+          method: 'get'
+        }).catch(function (error) {
+          if (error.response) {
+            store.dispatch('FedLogOut')
+            next({ path: '/login' })
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log('Error', error.message);
+          }
+        })
         // 没有动态改变权限的需求可直接next() 删除下方权限判断 ↓
         if (hasPermission(store.getters.roles, to.meta.roles)) {
           next()//

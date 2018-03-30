@@ -19,23 +19,23 @@
               </el-form-item>
 
               <el-form-item label="姓名" prop="name" label-width="70px">
-                <el-input :disabled=disable.nameDisable size="large" placeholder="输入姓名" v-model="userInfo.name">
+                <el-input :disabled=disable.nameDisable size="large" placeholder="输入姓名" v-model.trim="userInfo.name">
                   <i slot="prefix"><svg-icon icon-class="people" /></i>
                 </el-input>
               </el-form-item>
               <el-form-item label="电话" prop="cell" label-width="70px">
-                <el-input :disabled=disable.cellDisable size="large" placeholder="输入手机号码" v-model="userInfo.cell">
+                <el-input :disabled=disable.cellDisable size="large" placeholder="输入手机号码" v-model.trim="userInfo.cell">
                   <i slot="prefix" class="el-input__icon el-icon-phone"></i>
                 </el-input>
               </el-form-item>
               <el-form-item label="身份证" prop="idNum" label-width="70px">
 
-                <el-input :disabled=disable.idNumDisable size="large" placeholder="输入身份证号码" v-model="userInfo.idNum">
+                <el-input :disabled=disable.idNumDisable size="large" placeholder="输入身份证号码" v-model.trim="userInfo.idNum">
                   <i slot="prefix"><svg-icon icon-class="language" /></i>
                 </el-input>
               </el-form-item>
               <el-form-item label="银行卡" prop="bankId" label-width="70px">
-                <el-input :disabled=disable.bankIdDisable size="large" placeholder="输入银行卡号" v-model="userInfo.bankId">
+                <el-input :disabled=disable.bankIdDisable size="large" placeholder="输入银行卡号" v-model.trim="userInfo.bankId">
                   <i slot="prefix"><svg-icon icon-class="documentation" /></i>
                 </el-input>
               </el-form-item>

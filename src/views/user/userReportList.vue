@@ -17,38 +17,39 @@
     </div>
     <el-table :data="list" row-key="id"  v-loading.body="listLoading" border highlight-current-row fit stripe style="width: 100%">
 
-      <el-table-column align="center" label="报告编号" width="150">
+      <el-table-column align="center" label="报告编号" >
         <template slot-scope="scope">
           <span>{{scope.row.report.num}}</span>
         </template>
       </el-table-column>
-      <el-table-column align="center" label="被查询人姓名" width="150">
+      <el-table-column align="center" label="被查询人姓名" >
         <template slot-scope="scope">
           <span>{{scope.row.report.name}}</span>
         </template>
       </el-table-column>
 
-      <el-table-column width="180px" align="center" label="报告日期">
+      <el-table-column  align="center" label="报告日期">
         <template slot-scope="scope">
           <span>{{scope.row.report.created_at | parseTime('{y}-{m}-{d} {h}:{i}')}}</span>
         </template>
       </el-table-column>
 
-      <el-table-column min-width="300px" label="查询服务">
+      <el-table-column  label="查询服务">
         <template slot-scope="scope">
           <span>{{scope.row.service}}</span>
         </template>
       </el-table-column>
 
-      <el-table-column width="110px" align="center" label="Author">
+      <el-table-column  align="center" label="Author">
         <template slot-scope="scope">
           <span>{{scope.row.nickName}}</span>
         </template>
       </el-table-column>
 
-      <el-table-column label="操作" width="80">
+      <el-table-column label="操作" >
         <template slot-scope="scope">
           <el-button type="text" @click="$router.push('/report/' + scope.row.report.id)">详情</el-button>
+          <el-button type="text" @click="open2(scope.$index)">删除</el-button>
         </template>
       </el-table-column>
 
@@ -81,13 +82,45 @@
         },
         sortable: null,
         oldList: [],
-        newList: []
+        newList: [],
+        visible2: false,
       }
     },
     created() {
       this.getList()
     },
     methods: {
+      open2(index) {
+        const report = this.list[index].report
+        this.$confirm('永久删除 ' + report.name + ' 的报告是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$http({
+            method: 'DELETE',
+            url: '/api/admin/report/' + report.id,
+          }).then(response => {
+            const status = response.data.status
+            if (status === 1) {
+              this.$message({
+                type: 'success',
+                message: '删除成功!'
+              })
+            } else {
+              this.$message({
+                type: 'danger',
+                message: '删除失败，找不到报告'
+              })
+            }
+          })
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          })
+        })
+      },
       getList() {
         this.listQuery.userId = this.$route.params.userId
         this.listLoading = true
