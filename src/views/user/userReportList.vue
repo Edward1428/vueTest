@@ -12,6 +12,7 @@
           </el-input>
         </el-col>
         <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">搜索</el-button>
+        <el-button class="filter-item" type="primary" @click="handleDownload">Export Excel</el-button>
       </el-row>
 
     </div>
@@ -66,11 +67,13 @@
 <script>
   import { fetchList } from '@/api/article'
   import Sortable from 'sortablejs'
+  import { parseTime } from '@/utils'
 
   export default {
     data() {
       return {
         list: null,
+        customerList: null,
         total: null,
         listLoading: true,
         listQuery: {
@@ -88,6 +91,7 @@
     },
     created() {
       this.getList()
+      this.getCustomer()
     },
     methods: {
       open2(index) {
@@ -134,6 +138,14 @@
           this.listLoading = false
         })
       },
+      getCustomer() {
+        this.$http({
+          method: 'GET',
+          url: '/api/admin/customer/' + this.$route.params.userId
+        }).then(response => {
+          this.customerList = response.data.data
+        })
+      },
       edit(id) {
         this.$router.push('/report/' + id)
       },
@@ -147,6 +159,24 @@
       handleCurrentChange(val) {
         this.listQuery.page = val
         this.getList()
+      },
+      formatJson(filterVal, jsonData) {
+        return jsonData.map(v => filterVal.map(j => {
+          if (j === 'created_at') {
+            return parseTime(v[j])
+          } else {
+            return v[j]
+          }
+        }))
+      },
+      handleDownload() {
+        import('@/vendor/Export2Excel').then(excel => {
+          const tHeader = ['name', 'idNum', 'cell', 'bankId', 'created_at']
+          const filterVal = ['name', 'idNum', 'cell', 'bankId', 'created_at']
+          const list = this.customerList
+          const data = this.formatJson(filterVal, list)
+          excel.export_json_to_excel(tHeader, data, '汇总')
+        })
       }
     }
   }
