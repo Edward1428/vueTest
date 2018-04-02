@@ -36,7 +36,17 @@
       <social-sign />
     </el-dialog>
 
+
+      <div class="footer">
+        <p>
+          Copyright &copy  2017 yougeguard.com Inc. All Rights Reserved. 
+        </p>
+        <a href="http://www.miitbeian.gov.cn/">粤ICP备18024498号-1</a>
+
+      </div>
+
   </div>
+
 </template>
 
 <script>
@@ -232,6 +242,15 @@ $light_gray:#eee;
   }
   .image {
     width: 100%;
+  }
+  .footer {
+    position: absolute;
+    text-align:center;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    color: #b1b1b1;
   }
 }
 </style>
