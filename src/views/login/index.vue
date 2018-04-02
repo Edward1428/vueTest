@@ -249,7 +249,7 @@ $light_gray:#eee;
     bottom: 20px;
     left: 0;
     right: 0;
-    margin: auto;
+
     color: #b1b1b1;
   }
 }
