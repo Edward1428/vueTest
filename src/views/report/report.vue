@@ -521,6 +521,10 @@
                   label="命中事件">
                 </el-table-column>
                 <el-table-column
+                  prop="blackCount"
+                  label="事件涉及数量">
+                </el-table-column>
+                <el-table-column
                   prop="blackPublishSource"
                   label="备注">
                 </el-table-column>
