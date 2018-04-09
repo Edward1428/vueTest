@@ -70,7 +70,6 @@ const user = {
             reject('error')
           }
           const data = response.data.data
-          console.log(data)
           if (data.role === 1) {
             commit('SET_ROLES', ['admin'])
           } else if (data.role === 2) {

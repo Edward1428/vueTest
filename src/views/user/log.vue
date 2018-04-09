@@ -102,8 +102,6 @@
       },
       edit(index) {
         var user = this.list[index].user
-        console.log(user)
-        console.log(user.nickName)
         this.userId = user.id
         this.nickName = user.nickName
         this.integral = user.integral
