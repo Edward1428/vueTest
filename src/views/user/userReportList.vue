@@ -73,7 +73,7 @@
     data() {
       return {
         list: null,
-        customerList: null,
+        excel: null,
         total: null,
         listLoading: true,
         listQuery: {
@@ -143,7 +143,7 @@
           method: 'GET',
           url: '/api/admin/customer/' + this.$route.params.userId
         }).then(response => {
-          this.customerList = response.data.data
+          this.excel = response.data.data
         })
       },
       edit(id) {
@@ -171,9 +171,11 @@
       },
       handleDownload() {
         import('@/vendor/Export2Excel').then(excel => {
-          const tHeader = ['name', 'idNum', 'cell', 'bankId', 'created_at']
-          const filterVal = ['name', 'idNum', 'cell', 'bankId', 'created_at']
-          const list = this.customerList
+          const tHeader = ['验证时间', '姓名', '身份证', '手机号', '银行卡', '手机验证', '身份证验证', '银行卡验证', '背景黑名单',
+            '手机在网时长', '归属地省', '归属地市', '套餐名', '严重违法', '信贷逾期', '法院涉诉', '潜在风险', '多头借贷', '不良记录']
+          const filterVal = ['created_at', 'name', 'idNum', 'cell', 'bankId', 'cellCheck', 'idcardCheck', 'bankcardCheck',
+            'carCheck', 'cellLong', 'prov', 'city', 'cellName', 'blackCount1', 'blackCount2', 'blackCount3', 'blackCount4', 'blackCount5', 'bad']
+          const list = this.excel
           const data = this.formatJson(filterVal, list)
           excel.export_json_to_excel(tHeader, data, '汇总')
         })

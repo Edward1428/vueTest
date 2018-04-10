@@ -59,12 +59,12 @@
           <span>{{scope.row.countSeven}}</span>
         </template>
       </el-table-column>
-      <el-table-column  align="center" label="1天消耗积分">
+      <el-table-column  align="center" label="24小时消耗积分">
         <template slot-scope="scope">
           <span>{{scope.row.sumOne}}</span>
         </template>
       </el-table-column>
-      <el-table-column  align="center" label="1天报告">
+      <el-table-column  align="center" label="24小时报告">
         <template slot-scope="scope">
           <span>{{scope.row.countOne}}</span>
         </template>
