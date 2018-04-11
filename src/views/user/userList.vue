@@ -9,6 +9,7 @@
         </el-col>
         <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">搜索</el-button>
         <el-button class="filter-item" type="success" icon="el-icon-plus" @click="insertVisible = true">新增用户</el-button>
+        <el-button class="filter-item" type="primary" @click="handleDownload">Export Excel（所有用户）</el-button>
       </el-row>
 
     </div>
@@ -145,10 +146,12 @@
 <script>
   import { fetchList } from '@/api/article'
   import Sortable from 'sortablejs'
+  import { parseTime } from '@/utils'
 
   export default {
     data() {
       return {
+        excel: null,
         list: null,
         total: null,
         listLoading: true,
@@ -241,6 +244,40 @@
       handleCurrentChange(val) {
         this.listQuery.page = val
         this.getList()
+      },
+      getCustomer() {
+        this.$http({
+          method: 'GET',
+          url: '/api/admin/customer/'
+        }).then(response => {
+          this.excel = response.data.data
+        })
+      },
+      formatJson(filterVal, jsonData) {
+        return jsonData.map(v => filterVal.map(j => {
+          if (j === 'created_at') {
+            return parseTime(v[j])
+          } else {
+            return v[j]
+          }
+        }))
+      },
+      handleDownload() {
+        this.$http({
+          method: 'GET',
+          url: '/api/admin/customer/all'
+        }).then(response => {
+          this.excel = response.data.data
+          import('@/vendor/Export2Excel').then(excel => {
+            const tHeader = ['用户', '验证时间', '姓名', '身份证', '手机号', '银行卡', '手机验证', '身份证验证', '银行卡验证', '背景黑名单',
+              '手机在网时长', '归属地省', '归属地市', '套餐名', '严重违法', '信贷逾期', '法院涉诉', '潜在风险', '多头借贷', '不良记录']
+            const filterVal = ['nickName', 'created_at', 'name', 'idNum', 'cell', 'bankId', 'cellCheck', 'idcardCheck', 'bankcardCheck',
+              'carCheck', 'cellLong', 'prov', 'city', 'cellName', 'blackCount1', 'blackCount2', 'blackCount3', 'blackCount4', 'blackCount5', 'bad']
+            const list = this.excel
+            const data = this.formatJson(filterVal, list)
+            excel.export_json_to_excel(tHeader, data, '所有用户')
+          })
+        })
       }
     }
   }
