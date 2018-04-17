@@ -39,7 +39,7 @@
 
       <div class="footer">
         <p>
-          Copyright &copy  2017 yougeguard.com Inc. All Rights Reserved. 
+          &copy 2017-2018 广州秘群互联网技术有限公司 版权所有
         </p>
         <a href="http://www.miitbeian.gov.cn/">粤ICP备18024498号-1</a>
 
