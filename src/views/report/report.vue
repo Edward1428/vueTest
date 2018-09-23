@@ -339,8 +339,9 @@
               <el-row>
 
                 <el-col :span="4">
-                  <el-card>
-                    <img :src="check.photo" class="image"/>
+                  <el-card style="width: 200px; height: 220px">
+                    <img v-show="check.photo" :src="check.photo" class="image"/>
+                    <svg-icon v-show="!check.photo" icon-class="user" class-name="card-panel-icon" style="height: 200px; width: 155px" />
                   </el-card>
                 </el-col>
                 <el-col :span="20">
